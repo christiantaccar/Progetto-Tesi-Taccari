@@ -1,0 +1,54 @@
+{
+    "objects": {
+        "serie1": {
+            "usa": false,
+            "comparabile": false,
+            "esclusivo": false,
+            "icona": "",
+            "colore_confini": "red",
+            "modalita": "q"
+        },
+        "serie2": {
+            "usa": true,
+            "comparabile": true,
+            "esclusivo": false,
+            "icona": "",
+            "colore_confini": "",
+            "modalita": ""
+        },
+        "serie3": {
+            "usa": true,
+            "comparabile": false,
+            "esclusivo": false,
+            "icona": "",
+            "colore_confini": "blue",
+            "modalita": "a"
+        },
+        "serie4": {
+            "usa": true,
+            "comparabile": true,
+            "esclusivo": false,
+            "icona": "",
+            "colore_confini": "",
+            "modalita": ""
+        },
+        "serie5": {
+            "usa": false,
+            "comparabile": false,
+            "esclusivo": false,
+            "icona": "",
+            "colore_confini": "",
+            "modalita": ""
+        }
+    },
+    "comparable_options": {
+        "modalita": "m",
+        "colore_confini": "red",
+        "esclusivo": false
+    },
+    "livello_massimo": "continenti",
+    "livello_minimo": "regioni",
+    "drill_down": true,
+    "livello_di_paragone": "superiore",
+    "mostra_area": true
+}
