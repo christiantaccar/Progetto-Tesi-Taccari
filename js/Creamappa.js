@@ -3,7 +3,7 @@ async function creamappa(){
     try {
         // Esegue i fetch in parallelo (più veloce)
         const [rispostaConfig, rispostaDati] = await Promise.all([
-            fetch('./setup/SetUp.json'),
+            fetch('./setup/config.json'),
             fetch('./NAVmaps.json')
         ]);
     

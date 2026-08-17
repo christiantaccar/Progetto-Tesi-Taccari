@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MAPPA1.0</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    
+
+    <style>
+        #map { 
+            height: 600px; 
+            width: 100%;
+        }
+
+.leaflet-interactive:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.leaflet-tooltip-pane {
+    pointer-events: none; /* Evita che il tooltip stesso blocchi i tocchi successivi */
+}
+    </style>
+</head>
+<body>
+
+    <h1>Mappa</h1>
+    <div id="map"></div>
+
+    <!-- Script in ordine di dipendenza -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="https://jquery.com"></script>
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script src="./js/leaflet-starcircle.js"></script>
+
+    
+    <!-- Il tuo script principale -->
+    <script type="module" src="./js/Creamappa.js"></script>
+
+</body>
+</html>

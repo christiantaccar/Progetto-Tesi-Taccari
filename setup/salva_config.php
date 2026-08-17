@@ -14,7 +14,7 @@ if (!is_array($data)) {
 }
 
 
-$uploadDir = __DIR__ . "/../imgs/";  // 👈 FUORI dalla cartella PHP
+$uploadDir = __DIR__ . "/../images/";
 
 // sicurezza: anche se già esiste non rompe nulla
 if (!is_dir($uploadDir)) {
@@ -41,7 +41,7 @@ for ($i = 1; $i <= 5; $i++) {
         if (move_uploaded_file($file["tmp_name"], $target)) {
 
             // URL che userai in Leaflet
-            $data["objects"]["serie$i"]["icona"] = "imgs/" . $uniqueName;
+            $data["objects"]["serie$i"]["icona"] = "images/" . $uniqueName;
         }
     }
 }

@@ -1,0 +1,49 @@
+{
+    "objects": {
+        "serie1": {
+            "usa": true,
+            "comparabile": false,
+            "esclusivo": true,
+            "colore_confini": "blue",
+            "modalita": "a"
+        },
+        "serie2": {
+            "usa": true,
+            "comparabile": false,
+            "esclusivo": true,
+            "colore_confini": "red",
+            "modalita": "a"
+        },
+        "serie3": {
+            "usa": false,
+            "comparabile": false,
+            "esclusivo": false,
+            "colore_confini": "",
+            "modalita": ""
+        },
+        "serie4": {
+            "usa": false,
+            "comparabile": false,
+            "esclusivo": false,
+            "colore_confini": "",
+            "modalita": ""
+        },
+        "serie5": {
+            "usa": false,
+            "comparabile": false,
+            "esclusivo": false,
+            "colore_confini": "",
+            "modalita": ""
+        }
+    },
+    "comparable_options": {
+        "modalita": "",
+        "colore_confini": "",
+        "esclusivo": false
+    },
+    "livello_di_paragone": "superiore",
+    "drill_down": true,
+    "livello_massimo": "nazioni",
+    "livello_minimo": "comuni",
+    "mostra_area": false
+}
