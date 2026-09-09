@@ -1,7 +1,27 @@
-<!DOCTYPE html> <!-- Equivalente di setup.html -->
-<html>
+<?php
+// Opzioni disponibili, definite una sola volta e riusate per tutte le serie
+$colori = ["blue" => "blue", "red" => "red", "green" => "green"];
+
+$modalita = [
+    "a"  => "Evidenzia Area",
+    "mp" => "Marker Personalizzato",
+    "cm" => "Marker Cerchio",
+    "t"  => "Marker Triangolo",
+    "q"  => "Marker Quadrato"
+];
+
+$modalitaComparabili = [
+    "c" => "Cerchi concentrici",
+    "m" => "Marker colorati"
+];
+
+$livelli = ["continenti", "nazioni", "regioni", "province", "comuni"];
+?>
+<!DOCTYPE html>
+<html lang="it">
 
 <head>
+    <meta charset="utf-8">
     <title>SetUp</title>
     <style>
         table {
@@ -12,6 +32,17 @@
         td {
             border: 1px solid black;
             padding: 6px;
+        }
+
+        .errore {
+            color: #b00020;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        input:disabled,
+        select:disabled {
+            background: #eee;
         }
     </style>
 </head>
@@ -31,228 +62,204 @@
                     <th>Icona</th>
                     <th>Colore Confini</th>
                     <th>Modalità</th>
-
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Serie 1</td>
-                    <td><input type="checkbox" class="usa" data-i="1"></td>
-                    <td><input type="checkbox" class="comp" data-i="1"></td>
-                    <td><input type="checkbox" class="escl" data-i="1"></td>
-                    <td><input type="file" class="icon" data-i="1"></td>
-                    <td><select class="colore" data-i="1">
-                            <option value="" selected disabled hidden></option>
-                            <option value="blue">blue</option>
-                            <option value="red">red</option>
-                            <option value="green">green</option>
-                        </select>
-                    </td>
-                    <td><select class="modalita" data-i="1" >
-                            <option value="" selected disabled hidden></option>
-                            <option value="a">Evidenzia Area</option>
-                            <option value="mp">Marker Personalizzato</option>
-                            <option value="cm">Marker Cerchio</option>
-                            <option value="t">Marker Triangolo</option>
-                            <option value="q">Marker Quadrato</option>
-
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Serie 2</td>
-                    <td><input type="checkbox" class="usa" data-i="2"></td>
-                    <td><input type="checkbox" class="comp" data-i="2"></td>
-                    <td><input type="checkbox" class="escl" data-i="2"></td>
-                    <td><input type="file" class="icon" data-i="2"></td>
-                    <td><select class="colore" data-i="2">
-                            <option value="" selected disabled hidden></option>
-                            <option value="blue">blue</option>
-                            <option value="red">red</option>
-                            <option value="green">green</option>
-                        </select>
-                    </td>
-                    <td><select class="modalita" data-i="2" >
-                            <option value="" selected disabled hidden></option>
-                            <option value="a">Evidenzia Area</option>
-                            <option value="mp">Marker Personalizzato</option>
-                            <option value="cm">Marker Cerchio</option>
-                            <option value="t">Marker Triangolo</option>
-                            <option value="q">Marker Quadrato</option>
-
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Serie 3</td>
-                    <td><input type="checkbox" class="usa" data-i="3"></td>
-                    <td><input type="checkbox" class="comp" data-i="3"></td>
-                    <td><input type="checkbox" class="escl" data-i="3"></td>
-                    <td><input type="file" class="icon" data-i="3"></td>
-                    <td><select class="colore" data-i="3">
-                            <option value="" selected disabled hidden></option>
-                            <option value="blue">blue</option>
-                            <option value="red">red</option>
-                            <option value="green">green</option>
-                        </select>
-                    </td>
-                    <td><select class="modalita" data-i="3" >
-                            <option value="" selected disabled hidden></option>
-                            <option value="a">Evidenzia Area</option>
-                            <option value="mp">Marker Personalizzato</option>
-                            <option value="cm">Marker Cerchio</option>
-                            <option value="t">Marker Triangolo</option>
-                            <option value="q">Marker Quadrato</option>
-
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Serie 4</td>
-                    <td><input type="checkbox" class="usa" data-i="4"></td>
-                    <td><input type="checkbox" class="comp" data-i="4"></td>
-                    <td><input type="checkbox" class="escl" data-i="4"></td>
-                    <td><input type="file" class="icon" data-i="4"></td>
-                    <td><select class="colore" data-i="4">
-                            <option value="" selected disabled hidden></option>
-                            <option value="blue">blue</option>
-                            <option value="red">red</option>
-                            <option value="green">green</option>
-                        </select>
-                    </td>
-                    <td><select class="modalita" data-i="4" >
-                            <option value="" selected disabled hidden></option>
-                            <option value="a">Evidenzia Area</option>
-                            <option value="mp">Marker Personalizzato</option>
-                            <option value="cm">Marker Cerchio</option>
-                            <option value="t">Marker Triangolo</option>
-                            <option value="q">Marker Quadrato</option>
-
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Serie 5</td>
-                    <td><input type="checkbox" class="usa" data-i="5"></td>
-                    <td><input type="checkbox" class="comp" data-i="5"></td>
-                    <td><input type="checkbox" class="escl" data-i="5"></td>
-                    <td><input type="file" class="icon" data-i="5"></td>
-                    <td><select class="colore" data-i="5">
-                            <option value="" selected disabled hidden></option>
-                            <option value="blue">blue</option>
-                            <option value="red">red</option>
-                            <option value="green">green</option>
-                        </select>
-                    </td>
-                    <td><select class="modalita" data-i="5" >
-                            <option value="" selected disabled hidden></option>
-                            <option value="a">Evidenzia Area</option>
-                            <option value="mp">Marker Personalizzato</option>
-                            <option value="cm">Marker Cerchio</option>
-                            <option value="t">Marker Triangolo</option>
-                            <option value="q">Marker Quadrato</option>
-                        </select>
-                    </td>
-                </tr>
+                <?php for ($i = 1; $i <= 5; $i++): ?>
+                    <tr>
+                        <td>Serie <?= $i ?></td>
+                        <td><input type="checkbox" class="usa" data-i="<?= $i ?>"></td>
+                        <td><input type="checkbox" class="comp" data-i="<?= $i ?>"></td>
+                        <td><input type="checkbox" class="escl" data-i="<?= $i ?>"></td>
+                        <td><input type="file" class="icon" data-i="<?= $i ?>" accept="image/png,image/jpeg,image/gif,image/webp"></td>
+                        <td>
+                            <select class="colore" data-i="<?= $i ?>">
+                                <option value="" selected disabled hidden></option>
+                                <?php foreach ($colori as $valore => $etichetta): ?>
+                                    <option value="<?= $valore ?>"><?= $etichetta ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </td>
+                        <td>
+                            <select class="modalita" data-i="<?= $i ?>">
+                                <option value="" selected disabled hidden></option>
+                                <?php foreach ($modalita as $valore => $etichetta): ?>
+                                    <option value="<?= $valore ?>"><?= $etichetta ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </td>
+                    </tr>
+                <?php endfor; ?>
             </tbody>
         </table>
+
         <h2>Opzioni di visualizzazione</h2>
-        <label>Drill: </label><input type="checkbox" id="drill"> <br>
+        <label>Drill down: </label>
+        <select id="drill">
+            <option value="no" selected>Disattivato</option>
+            <option value="automatico">Automatico (segue lo zoom)</option>
+            <option value="manuale">Manuale (doppio click / click destro)</option>
+        </select><br>
         <label>Evidenzia Area: </label><input type="checkbox" id="evi"><br>
-        <label>Livello massimo:</label><select id="lvlmax">
-            <option value="continenti" selected disabled hidden>continenti</option>
-            <option value="nazioni">nazioni</option>
-            <option value="regioni">regioni</option>
-            <option value="province">province</option>
-            <option value="comuni">comuni</option>
+        <label>Mostra livello dettagli: </label><input type="checkbox" id="dett"><br>
+
+        <label>Livello massimo:</label>
+        <select id="lvlmax">
+            <?php foreach ($livelli as $l): ?>
+                <option value="<?= $l ?>" <?= $l === "continenti" ? "selected" : "" ?>><?= $l ?></option>
+            <?php endforeach; ?>
         </select>
-        <label>Livello minimo:</label><select id="lvlmin">
-            <option value="continenti">continenti</option>
-            <option value="nazioni">nazioni</option>
-            <option value="regioni">regioni</option>
-            <option value="province">province</option>
-            <option value="comuni" selected disabled hidden>comuni</option>
-        </select> <br>
-        <label>Livello di paragone</label> <select id="lvlpara">
+
+        <label>Livello minimo:</label>
+        <select id="lvlmin">
+            <?php foreach ($livelli as $l): ?>
+                <option value="<?= $l ?>" <?= $l === "comuni" ? "selected" : "" ?>><?= $l ?></option>
+            <?php endforeach; ?>
+        </select><br>
+
+        <label>Livello di paragone</label>
+        <select id="lvlpara">
             <option value="superiore" selected>Superiore</option>
             <option value="massimo">Massimo</option>
         </select>
+
         <h2>Opzioni di comparazione</h2>
-        <label>Modalità</label> <select id="comp" >
+        <label>Modalità</label>
+        <select id="comp">
             <option value="" selected disabled hidden></option>
-            <option value="c">Cerchi concentrici</option>
-            <option value="m">Marker colorati</option>
+            <?php foreach ($modalitaComparabili as $valore => $etichetta): ?>
+                <option value="<?= $valore ?>"><?= $etichetta ?></option>
+            <?php endforeach; ?>
         </select><br>
-        <label>Colore Confini </label><select id="confcomp">
+
+        <label>Colore Confini </label>
+        <select id="confcomp">
             <option value="" selected disabled hidden></option>
-            <option value="blue">blue</option>
-            <option value="red">red</option>
-            <option value="green">green</option>
-        </select> <br>
-        <label>Esclusività: </label> 
+            <?php foreach ($colori as $valore => $etichetta): ?>
+                <option value="<?= $valore ?>"><?= $etichetta ?></option>
+            <?php endforeach; ?>
+        </select><br>
+
+        <label>Esclusività: </label>
         <input type="checkbox" id="esclcomp">
 
         <br><br>
         <button type="submit">Salva configurazione</button>
+        <div id="errori" class="errore"></div>
     </form>
+
     <script src="setup/change.js"></script>
     <script>
+        // Ordine gerarchico usato per validare i livelli
+        const GERARCHIA = <?= json_encode($livelli) ?>;
+
         document.getElementById("setupForm").addEventListener("submit", function (e) {
             e.preventDefault();
 
+            const errori = [];
             const objects = {};
             const formData = new FormData();
 
+            const livello_massimo = document.getElementById("lvlmax").value;
+            const livello_minimo = document.getElementById("lvlmin").value;
+
+            // il livello minimo non può essere più generale del massimo
+            if (GERARCHIA.indexOf(livello_minimo) < GERARCHIA.indexOf(livello_massimo)) {
+                errori.push("Il livello minimo deve essere uguale o più specifico del livello massimo.");
+            }
+
+            let almenoUnaSerie = false;
+
             for (let i = 1; i <= 5; i++) {
+                const usa = document.querySelector(`.usa[data-i="${i}"]`).checked;
+                const comparabile = document.querySelector(`.comp[data-i="${i}"]`).checked;
+                const esclusivo = document.querySelector(`.escl[data-i="${i}"]`).checked;
+                const colore = document.querySelector(`.colore[data-i="${i}"]`).value;
+                const modalita = document.querySelector(`.modalita[data-i="${i}"]`).value;
+
                 const fileInput = document.querySelector(`.icon[data-i="${i}"]`);
                 const file = fileInput.files[0];
-                if (file) {
-                formData.append(`icon_${i}`, file);
+
+                if (usa) {
+                    almenoUnaSerie = true;
+
+                    // una serie esclusiva deve avere una modalità di rappresentazione
+                    if (!comparabile && !modalita) {
+                        errori.push(`Serie ${i}: selezionare una modalità di visualizzazione.`);
+                    }
+
+                    // il marker personalizzato richiede l'icona
+                    if (modalita === "mp" && !file) {
+                        errori.push(`Serie ${i}: la modalità "Marker Personalizzato" richiede il caricamento di un'icona.`);
+                    }
                 }
 
+                if (file && modalita === "mp") {
+                    formData.append(`icon_${i}`, file);
+                }
 
                 objects[`serie${i}`] = {
-                    usa: document.querySelector(`.usa[data-i="${i}"]`).checked,
-                    comparabile: document.querySelector(`.comp[data-i="${i}"]`).checked,
-                    esclusivo: document.querySelector(`.escl[data-i="${i}"]`).checked,
-                    colore_confini: document.querySelector(`.colore[data-i="${i}"]`).value,
-                    modalita: document.querySelector(`.modalita[data-i="${i}"]`).value
+                    usa: usa,
+                    comparabile: comparabile,
+                    esclusivo: esclusivo,
+                    colore_confini: colore,
+                    modalita: modalita,
+                    icona: ""
                 };
             }
+
+            if (!almenoUnaSerie) {
+                errori.push("Selezionare almeno una serie da visualizzare.");
+            }
+
             const comparable_options = {
                 modalita: document.querySelector("#comp").value,
-                colore_confini:document.querySelector("#confcomp").value,
-                esclusivo:document.getElementById("esclcomp").checked
+                colore_confini: document.querySelector("#confcomp").value,
+                esclusivo: document.getElementById("esclcomp").checked
             };
-            const livello_di_paragone=document.getElementById("lvlpara").value;
-            const drill_down=document.querySelector("#drill").checked;
-            const livello_massimo=document.getElementById("lvlmax").value;
-            const livello_minimo=document.getElementById("lvlmin").value;
-            const mostra_area=document.getElementById("evi").checked;
 
-           const payload = {
-    objects: objects,
-    comparable_options: comparable_options,
-    livello_di_paragone: livello_di_paragone,
-    drill_down: drill_down,
-    livello_massimo: livello_massimo,
-    livello_minimo: livello_minimo,
-    mostra_area: mostra_area
-};
+            // se ci sono serie comparabili attive serve una modalità comune
+            const comparabiliAttive = Object.values(objects).some(o => o.usa && o.comparabile);
+            if (comparabiliAttive && !comparable_options.modalita) {
+                errori.push("Selezionare una modalità per le serie comparabili.");
+            }
 
-formData.append("data", JSON.stringify(payload));
+            const contenitoreErrori = document.getElementById("errori");
+            if (errori.length > 0) {
+                contenitoreErrori.innerHTML = errori.join("<br>");
+                return;
+            }
+            contenitoreErrori.innerHTML = "";
 
-    fetch("setup/salva_config.php", {
-        method: "POST",
-        body: formData
-    })
-    .then(res => res.text())
-    .then(res => {
-        console.log("Risposta server:", res);
-        window.location.href = "../PaginaMappa.php";
-    })
-    .catch(err => console.error(err));
-});
+            const payload = {
+                objects: objects,
+                comparable_options: comparable_options,
+                livello_di_paragone: document.getElementById("lvlpara").value,
+                drill_down: document.querySelector("#drill").value,
+                livello_massimo: livello_massimo,
+                livello_minimo: livello_minimo,
+                mostra_area: document.getElementById("evi").checked,
+                mostra_dettagli: document.getElementById("dett").checked
+            };
+
+            formData.append("data", JSON.stringify(payload));
+
+            fetch("setup/salva_config.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(res => res.text())
+                .then(res => {
+                    if (res.trim().startsWith("Errore")) {
+                        contenitoreErrori.textContent = res;
+                        return;
+                    }
+                    window.location.href = "PaginaMappa.php";
+                })
+                .catch(err => {
+                    contenitoreErrori.textContent = "Errore di rete: " + err.message;
+                });
+        });
     </script>
 
 </body>

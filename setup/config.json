@@ -2,48 +2,54 @@
     "objects": {
         "serie1": {
             "usa": true,
-            "comparabile": false,
-            "esclusivo": true,
-            "colore_confini": "blue",
-            "modalita": "a"
+            "comparabile": true,
+            "esclusivo": false,
+            "colore_confini": "",
+            "modalita": "",
+            "icona": ""
         },
         "serie2": {
             "usa": true,
-            "comparabile": false,
-            "esclusivo": true,
-            "colore_confini": "red",
-            "modalita": "a"
+            "comparabile": true,
+            "esclusivo": false,
+            "colore_confini": "",
+            "modalita": "",
+            "icona": ""
         },
         "serie3": {
             "usa": false,
             "comparabile": false,
             "esclusivo": false,
             "colore_confini": "",
-            "modalita": ""
+            "modalita": "",
+            "icona": ""
         },
         "serie4": {
             "usa": false,
             "comparabile": false,
             "esclusivo": false,
             "colore_confini": "",
-            "modalita": ""
+            "modalita": "",
+            "icona": ""
         },
         "serie5": {
             "usa": false,
             "comparabile": false,
             "esclusivo": false,
             "colore_confini": "",
-            "modalita": ""
+            "modalita": "",
+            "icona": ""
         }
     },
     "comparable_options": {
-        "modalita": "",
-        "colore_confini": "",
+        "modalita": "c",
+        "colore_confini": "blue",
         "esclusivo": false
     },
     "livello_di_paragone": "superiore",
-    "drill_down": true,
-    "livello_massimo": "nazioni",
+    "drill_down": "manuale",
+    "livello_massimo": "continenti",
     "livello_minimo": "comuni",
-    "mostra_area": false
+    "mostra_area": false,
+    "mostra_dettagli": true
 }
