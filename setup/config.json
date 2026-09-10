@@ -2,18 +2,18 @@
     "objects": {
         "serie1": {
             "usa": true,
-            "comparabile": true,
+            "comparabile": false,
             "esclusivo": false,
             "colore_confini": "",
-            "modalita": "",
+            "modalita": "a",
             "icona": ""
         },
         "serie2": {
             "usa": true,
-            "comparabile": true,
+            "comparabile": false,
             "esclusivo": false,
             "colore_confini": "",
-            "modalita": "",
+            "modalita": "a",
             "icona": ""
         },
         "serie3": {
@@ -42,8 +42,8 @@
         }
     },
     "comparable_options": {
-        "modalita": "c",
-        "colore_confini": "blue",
+        "modalita": "",
+        "colore_confini": "",
         "esclusivo": false
     },
     "livello_di_paragone": "superiore",
