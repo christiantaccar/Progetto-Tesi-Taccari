@@ -33,7 +33,6 @@
     <!-- Script in ordine di dipendenza -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
-    <script src="https://jquery.com"></script>
     <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
     <script src="./js/leaflet-starcircle.js"></script>
 

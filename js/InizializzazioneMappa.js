@@ -68,11 +68,13 @@ export async function inizializzaMappa(config, dati, idDiv) {
 
     for (let obj in config.objects) {
         if (config.objects[obj].usa) {
+            const nome = etichettaUnivoca(dati[0][`LBL${i + 1}`], i + 1, execlays, complays);
+
             if (config.objects[obj].comparabile && config.comparable_options.esclusivo) {
                 l.addLayer(layers[i]);
             }
-            else if (config.objects[obj].esclusivo) execlays[dati[0][`LBL${i + 1}`]] = layers[i];
-            else complays[dati[0][`LBL${i + 1}`]] = layers[i];
+            else if (config.objects[obj].esclusivo) execlays[nome] = layers[i];
+            else complays[nome] = layers[i];
         }
         i++;
     }
@@ -124,13 +126,14 @@ export async function inizializzaMappa(config, dati, idDiv) {
         });
     }
 
-    // DRILL-DOWN MANUALE: doppio click scende, click destro risale
+    // DRILL-DOWN MANUALE: doppio click scende, pulsante o click destro risale
     if (modalitaDrill === "manuale") {
         map.doubleClickZoom.disable();
 
-        map.on("dblclick", async (e) => {
-            L.DomEvent.stop(e);
+        const controlloRisali = creaControlloRisali(() => risali());
+        controlloRisali.addTo(map);
 
+        async function scendi() {
             const succ = getLivelloSuccessivo(ultimoLivelloCaricato, lvlminimo);
 
             if (succ) {
@@ -140,26 +143,116 @@ export async function inizializzaMappa(config, dati, idDiv) {
                 sottoLivelloMinimo = true;
                 mostraLivelloInferiore(layersAttivi, layers, data, label, config);
             }
-        });
 
-        map.on("contextmenu", async (e) => {
-            L.DomEvent.stop(e);
+            aggiornaStatoRisali();
+        }
 
+        async function risali() {
             if (sottoLivelloMinimo) {
                 // dai punti si risale al livello minimo
                 await cambiaLivello(lvlminimo, layersAttivi, layers, data, label, config);
+                aggiornaStatoRisali();
                 return;
             }
 
             const prec = getLivelloPrecedente(ultimoLivelloCaricato, livelloIniziale);
             if (prec) await cambiaLivello(prec, layersAttivi, layers, data, label, config);
+
+            aggiornaStatoRisali();
+        }
+
+        // il pulsante si disabilita quando non c'è più un livello superiore
+        function aggiornaStatoRisali() {
+            const puoRisalire = sottoLivelloMinimo ||
+                getLivelloPrecedente(ultimoLivelloCaricato, livelloIniziale) !== null;
+
+            controlloRisali.setAbilitato(puoRisalire);
+            controlloRisali.setLivello(
+                sottoLivelloMinimo ? "dettagli" : ultimoLivelloCaricato
+            );
+        }
+
+        map.on("dblclick", async (e) => {
+            L.DomEvent.stop(e);
+            await scendi();
         });
+
+        map.on("contextmenu", async (e) => {
+            L.DomEvent.stop(e);
+            await risali();
+        });
+
+        aggiornaStatoRisali();
     }
 
     // aggiornamento dimensione marker
     map.on('zoom', () => {
         aggiornaMarkerZoom(layers, map.getZoom(), config);
     });
+}
+
+/* Pulsante di risalita per il drill-down manuale.
+ * Mostra anche il livello corrente, altrimenti l'utente non ha modo
+ * di sapere dove si trova nella gerarchia.
+ */
+function creaControlloRisali(onClick) {
+    const controllo = L.control({ position: 'topleft' });
+
+    controllo.onAdd = function () {
+        const contenitore = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+
+        const bottone = L.DomUtil.create('a', '', contenitore);
+        bottone.href = '#';
+        bottone.title = 'Torna al livello superiore';
+        bottone.innerHTML = '&#8593;';
+        bottone.style.fontWeight = 'bold';
+        bottone.style.textAlign = 'center';
+
+        const etichetta = L.DomUtil.create('div', '', contenitore);
+        etichetta.style.padding = '2px 6px';
+        etichetta.style.background = '#fff';
+        etichetta.style.fontSize = '11px';
+        etichetta.style.textAlign = 'center';
+
+        // evita che il click sul controllo si propaghi alla mappa
+        L.DomEvent.disableClickPropagation(contenitore);
+        L.DomEvent.on(bottone, 'click', function (e) {
+            L.DomEvent.preventDefault(e);
+            if (bottone.style.pointerEvents !== 'none') onClick();
+        });
+
+        this._bottone = bottone;
+        this._etichetta = etichetta;
+
+        return contenitore;
+    };
+
+    controllo.setAbilitato = function (abilitato) {
+        if (!this._bottone) return;
+
+        this._bottone.style.opacity = abilitato ? '1' : '0.4';
+        this._bottone.style.pointerEvents = abilitato ? 'auto' : 'none';
+    };
+
+    controllo.setLivello = function (livello) {
+        if (this._etichetta) this._etichetta.textContent = livello || '';
+    };
+
+    return controllo;
+}
+
+/* Le voci del layer control sono indicizzate per etichetta: due serie con la
+ * stessa etichetta si sovrascriverebbero, facendone sparire una dalla mappa.
+ * In caso di omonimia (o di etichetta mancante) si ricade sul numero di serie.
+ */
+function etichettaUnivoca(etichetta, numeroSerie, execlays, complays) {
+    if (!etichetta) return `Serie ${numeroSerie}`;
+
+    if (etichetta in execlays || etichetta in complays) {
+        return `${etichetta} (serie ${numeroSerie})`;
+    }
+
+    return etichetta;
 }
 
 /* Le tre modalità si escludono a vicenda.

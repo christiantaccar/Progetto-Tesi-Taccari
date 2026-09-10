@@ -51,6 +51,10 @@ export async function mostraDatiLivello2(attivi, layers, livello, data, label, c
         }
 
         if (!cacheIndex[Padre]) continue;
+
+        //ulteriore controllo per non far sovrascrivere i layer
+        if (currentRenderId !== renderId) return;
+
         const feature = cacheIndex[Padre][nomeRegione];
         if (!feature) continue;
 

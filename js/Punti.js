@@ -1,7 +1,8 @@
-
-
-const MIN_SIZE = 10;
-const MAX_SIZE = 45;
+// resa grafica condivisa dalle due modalità di visualizzazione dei punti
+const COLORE_DETTAGLI = "yellow";
+const RAGGIO_FISSO = 6;   // layer dettagli: dimensione costante
+const RAGGIO_MIN = 6;     // livello inferiore: raggio proporzionale
+const RAGGIO_MAX = 30;
 
 /* Layer di dettaglio: un marker per ogni punto, indipendente dalle serie.
  * Viene esposto nel layer control come checkbox, quindi resta attivabile
@@ -15,9 +16,9 @@ export function creaLayerDettagli(data) {
         if (!coords) continue;
 
         const marker = L.starCircleMarker(coords, {
-            radius: 6,
+            radius: RAGGIO_FISSO,
             star: 1,
-            fillColor: "yellow",
+            fillColor: COLORE_DETTAGLI,
             color: "#000",
             weight: 1,
             opacity: 1,
@@ -62,20 +63,21 @@ export function mostraLivelloInferiore(attivi, layers, data, label, config) {
         // maxPerc > 100 indica record privi di coordinate accumulati in (0;0)
         if (maxPerc <= 0 || maxPerc > 100) continue;
 
-        const sWidth = Math.max(MIN_SIZE, MAX_SIZE * maxPerc / 100);
-        const sHeight = sWidth * 1.6;
-
-        const icona = new L.Icon({
-            iconUrl: "./images/blue-marker.png",
-            iconSize: [sWidth, sHeight],
-            iconAnchor: [sWidth / 2, sHeight],
-            popupAnchor: [1, -sHeight],
-            shadowSize: [sHeight, sHeight]
+        // stessa resa grafica del layer dettagli, così lo stesso dato
+        // resta riconoscibile da qualunque strada lo si raggiunga;
+        // qui però il raggio è proporzionale alla percentuale
+        const marker = L.starCircleMarker(coords, {
+            radius: Math.max(RAGGIO_MIN, RAGGIO_MAX * maxPerc / 100),
+            star: 1,
+            fillColor: COLORE_DETTAGLI,
+            color: "#000",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.7,
+            dettaglio: true
         });
 
-        const marker = L.marker(coords, { icon: icona });
         marker.perc = maxPerc;
-        marker.Icon = icona.options.iconUrl;
 
         marker.bindTooltip(costruisciTooltip(dettagli, attivi, label));
 
